@@ -55,7 +55,7 @@ public class GUIPage {
 
         ItemStack clickedItem = items[slot];
         ItemClickResult result = new ItemClickResult(items[slot], slot, data);
-        if (individualCallbacks.containsKey(slot) || clickedItem == null) individualCallbacks.get(slot).accept(player, data);
+        if (individualCallbacks.containsKey(slot)) individualCallbacks.get(slot).accept(player, data);
         validHandler.accept(player, result);
 
     }
