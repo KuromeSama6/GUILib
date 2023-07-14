@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 
 public class PageBuilder {
@@ -49,12 +50,21 @@ public class PageBuilder {
 
     public PageBuilder addItem(ItemStack item) {
         page.items[cursor] = item;
+        ++cursor;
         return this;
     }
 
     public PageBuilder addItem(int pos, ItemStack item) {
         setCursor(pos);
         addItem(item);
+        return this;
+    }
+
+    public PageBuilder addItemsMasked(BiPredicate<Integer, ItemStack> pred, ItemStack item) {
+        for (int i = 0; i < page.items.length; i++) {
+            if (pred.test(i, page.items[i])) page.items[i] = item.clone();
+        }
+
         return this;
     }
 

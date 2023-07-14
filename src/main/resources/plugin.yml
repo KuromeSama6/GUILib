@@ -1,4 +1,10 @@
 name: GUILib
-main: moe.hikal.guilib.GUIlib
+main: moe.hiktal.guilib.GUILib
 version: 1.0-SNAPSHOT
 author: KuromeSama6
+
+commands:
+  guilibtest:
+    usage: guilibtest [A/B/C/D/...]
+    description: tests guilib. requires op.
+    permission: guilib.test

@@ -17,8 +17,8 @@ public class GUIPage {
     public final GUIMenu menu;
     public final ItemStack[] items;
     private HashMap<Integer, BiConsumer<Player, ItemClickData>> individualCallbacks = new HashMap<>();
-    private BiConsumer<Player, ItemClickResult> validHandler;
-    private Consumer<Player> invalidHandler;
+    private BiConsumer<Player, ItemClickResult> validHandler = (a, b) -> {};
+    private Consumer<Player> invalidHandler = (p) -> {};
 
     public GUIPage(GUIMenu menu) {
         this.menu = menu;
@@ -50,10 +50,12 @@ public class GUIPage {
 
     void ProcessClick(InventoryClickEvent e, ItemClickData data) {
         Player player = (Player) e.getWhoClicked();
+
         int slot = e.getSlot();
 
-        ItemClickResult result = new ItemClickResult(slot, data);
-        if (individualCallbacks.containsKey(slot)) individualCallbacks.get(slot).accept(player, data);
+        ItemStack clickedItem = items[slot];
+        ItemClickResult result = new ItemClickResult(items[slot], slot, data);
+        if (individualCallbacks.containsKey(slot) || clickedItem == null) individualCallbacks.get(slot).accept(player, data);
         validHandler.accept(player, result);
 
     }

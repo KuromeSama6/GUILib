@@ -30,4 +30,17 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <excludePackageNames>com.example.package1, com.example.package2</excludePackageNames>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
